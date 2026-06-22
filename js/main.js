@@ -87,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Runtime Text Phrase Highlighter (Editorial marker accents)
     const highlightTerms = () => {
         const terms = [
+            /redesign for search first/gi,
+            /search-led website structure/gi,
+            /mobile-first visual presentation/gi,
+            /fast galleries and proof sections/gi,
+            /compounding 12-month search asset/gi,
+            /WooCommerce event ticketing/gi,
+            /UGC creator portfolio/gi,
             /SEO-first website revamp/gi,
             /SEO-first revamp/gi,
             /SEO revamp/gi,
@@ -138,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let html = node.textContent;
             
-            // Wrap matching terms in the highlight-accent span
-            html = html.replace(/(SEO-first website revamps?|SEO-first website revamping|SEO-first website revamp|SEO-first revamping|SEO-first revamp|SEO website revamp|SEO revamp|website redesign)/gi, (match) => {
+            // Wrap matching terms in the highlight-accent span (longest phrases matched first)
+            html = html.replace(/(redesign for search first|search-led website structure|mobile-first visual presentation|fast galleries and proof sections|compounding 12-month search asset|WooCommerce event ticketing|UGC creator portfolio|SEO-first website revamps?|SEO-first website revamping|SEO-first website revamp|SEO-first revamping|SEO-first revamp|SEO website revamp|SEO revamp|website redesign)/gi, (match) => {
                 return `<span class="highlight-accent">${match}</span>`;
             });
 
@@ -159,18 +166,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Text highlighting error: ", e);
     }
 
-    // 4. Intersection Observer for Scroll Reveals
+    // 4. Intersection Observer for Scroll Reveals and Highlighter Sweeps
     const initScrollReveals = () => {
         const sections = document.querySelectorAll('.section');
         sections.forEach((section) => {
             section.classList.add('reveal');
         });
 
-        const observer = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
+                    sectionObserver.unobserve(entry.target);
                 }
             });
         }, {
@@ -179,7 +186,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         sections.forEach((section) => {
-            observer.observe(section);
+            sectionObserver.observe(section);
+        });
+
+        // Dynamic observer for highlighter draws
+        const highlights = document.querySelectorAll('.highlight-accent');
+        const highlightObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('highlighted');
+                    highlightObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.3,
+            rootMargin: '0px 0px -20px 0px'
+        });
+
+        highlights.forEach((highlight) => {
+            highlightObserver.observe(highlight);
         });
     };
 
@@ -190,6 +215,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const sections = document.querySelectorAll('.section');
         sections.forEach((section) => {
             section.classList.add('reveal', 'active');
+        });
+        const highlights = document.querySelectorAll('.highlight-accent');
+        highlights.forEach((highlight) => {
+            highlight.classList.add('highlighted');
         });
     }
 });
