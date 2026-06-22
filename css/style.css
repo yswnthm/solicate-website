@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Solicate Redesign Stylesheet
+   Solicate Redesign Stylesheet (v2 Refined)
    Theme: Paper & Ink (Editorial, Trustworthy, Structured)
    ========================================================================== */
 
@@ -40,6 +40,42 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+}
+
+/* Page-Wide Floating Editorial Frame */
+@media (min-width: 1024px) {
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 16px;
+    border: 1px solid var(--text-primary);
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
+
+/* Custom Highlight Selection */
+::selection {
+  background-color: var(--accent);
+  color: var(--paper);
+}
+
+/* Custom Editorial Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border: 2px solid var(--bg-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
 
 /* Typography */
@@ -408,7 +444,8 @@ a:hover {
 .hero {
   padding-top: var(--space-16) !important;
   padding-bottom: var(--space-16) !important;
-  border-bottom: var(--border-width) solid var(--text-primary);
+  border-top: var(--border-width) double var(--text-primary);
+  border-bottom: var(--border-width) double var(--text-primary);
   background-color: var(--bg-primary);
 }
 
@@ -446,6 +483,7 @@ a:hover {
   margin-top: var(--space-4);
   margin-bottom: var(--space-4);
   font-weight: 900;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
 }
 
 .hero p {
@@ -648,21 +686,26 @@ a:hover {
   border-bottom: var(--border-width) solid var(--text-primary);
 }
 
-.compare-table .col-solicate {
-  background-color: rgba(249, 115, 22, 0.04) !important;
-  border-left: 2px solid var(--accent);
-  border-right: 2px solid var(--accent);
-}
-
-.compare-table thead .col-solicate {
-  background-color: rgba(249, 115, 22, 0.08) !important;
+.compare-table tr {
+  transition: background-color var(--transition-fast) var(--ease-out-expo);
 }
 
 .compare-table tr:hover td {
-  background-color: rgba(17, 17, 17, 0.02);
+  background-color: rgba(17, 17, 17, 0.03);
 }
 
 .compare-table tr:hover td.col-solicate {
+  background-color: rgba(249, 115, 22, 0.08) !important;
+}
+
+.compare-table .col-solicate {
+  background-color: rgba(249, 115, 22, 0.03) !important;
+  border-left: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  transition: background-color var(--transition-fast) var(--ease-out-expo);
+}
+
+.compare-table thead .col-solicate {
   background-color: rgba(249, 115, 22, 0.08) !important;
 }
 
@@ -704,7 +747,9 @@ a:hover {
   position: relative;
   z-index: 2;
   transition: background-color var(--transition-normal) var(--ease-out-expo),
-              transform var(--transition-normal) var(--ease-out-expo);
+              transform var(--transition-normal) var(--ease-out-expo),
+              border-left var(--transition-normal) var(--ease-out-expo);
+  border-left: 0 solid var(--accent);
 }
 
 .step-card:last-child {
@@ -713,7 +758,8 @@ a:hover {
 
 .step-card:hover {
   background-color: var(--bg-secondary);
-  transform: translateX(4px);
+  transform: translateX(6px);
+  border-left: 4px solid var(--accent);
 }
 
 .step-num {
@@ -853,6 +899,15 @@ a:hover {
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
   position: relative;
+  transition: transform 0.4s var(--ease-out-expo),
+              box-shadow 0.4s var(--ease-out-expo);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.anatomy-wrapper:hover {
+  transform: translateY(-2px) rotateX(1deg) rotateY(-1deg);
+  box-shadow: var(--shadow-lg);
 }
 
 .anatomy-wrapper img {
@@ -881,6 +936,18 @@ a:hover {
   z-index: 10;
 }
 
+/* Staggered double-pulse ring effect */
+.anatomy-hotspot::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  animation: pulse-ring-outer 3s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+  pointer-events: none;
+  opacity: 0;
+}
+
 .anatomy-hotspot::after {
   content: '';
   position: absolute;
@@ -895,6 +962,12 @@ a:hover {
   0% { transform: scale(0.95); opacity: 0.8; }
   50% { transform: scale(1.35); opacity: 0; }
   100% { transform: scale(0.95); opacity: 0; }
+}
+
+@keyframes pulse-ring-outer {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
 }
 
 .anatomy-hotspot:hover {
@@ -1024,11 +1097,15 @@ a:hover {
   padding: var(--space-4) var(--space-5) !important;
   box-shadow: var(--shadow-sm);
   border-radius: var(--border-radius-sm);
-  transition: transform var(--transition-normal) var(--ease-out-expo);
+  transition: transform var(--transition-normal) var(--ease-out-expo),
+              box-shadow var(--transition-normal) var(--ease-out-expo),
+              border-color var(--transition-normal) var(--ease-out-expo);
 }
 
 .audit-step:hover {
-  transform: translateX(4px);
+  transform: translateX(6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent) !important;
 }
 
 .audit-step-num {
@@ -1051,11 +1128,30 @@ a:hover {
 
 .investment-note {
   background-color: var(--bg-primary) !important;
-  border: var(--border-width) solid var(--text-primary) !important;
+  border: var(--border-width) dashed var(--border-color-dark) !important; /* Visual invoice layout */
   padding: var(--space-5) !important;
   box-shadow: var(--shadow-sm);
   border-radius: var(--border-radius-sm);
   margin-top: 0 !important;
+  position: relative;
+}
+
+/* Watermark detail */
+.investment-note::after {
+  content: 'OFFICIAL ROADMAP';
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  border: 1.5px solid rgba(249, 115, 22, 0.2);
+  color: rgba(249, 115, 22, 0.2);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: bold;
+  padding: 3px 6px;
+  transform: rotate(-10deg);
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  pointer-events: none;
 }
 
 .investment-note p.subtext {
@@ -1081,12 +1177,14 @@ details {
   border-bottom: 1px solid var(--border-color-dark) !important;
   padding: var(--space-4) 0 !important;
   transition: background-color var(--transition-normal) var(--ease-out-expo),
-              padding-left var(--transition-normal) var(--ease-out-expo);
+              padding-left var(--transition-normal) var(--ease-out-expo),
+              border-left var(--transition-normal) var(--ease-out-expo);
+  border-left: 0 solid var(--accent);
 }
 
 details[open] {
   background-color: rgba(17, 17, 17, 0.02);
-  border-left: 3px solid var(--accent);
+  border-left: 4px solid var(--accent);
   padding-left: var(--space-4) !important;
 }
 
@@ -1100,10 +1198,17 @@ summary {
   padding-right: var(--space-8);
   color: var(--text-primary);
   user-select: none;
+  transition: transform var(--transition-fast) var(--ease-out-expo),
+              color var(--transition-fast) var(--ease-out-expo);
 }
 
 summary::-webkit-details-marker {
   display: none;
+}
+
+summary:hover {
+  transform: translateX(4px);
+  color: var(--accent);
 }
 
 summary::after {
@@ -1132,6 +1237,51 @@ details p {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.7;
+}
+
+/* ==========================================================================
+   Form inputs overrides (Audit page)
+   ========================================================================== */
+
+#audit-request-form {
+  border: var(--border-width) solid var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+  border-top: 6px solid var(--accent) !important;
+  padding: var(--space-6) !important;
+  box-shadow: var(--shadow-md) !important;
+  border-radius: var(--border-radius-md) !important;
+}
+
+.form-group label {
+  font-family: var(--font-sans) !important;
+  font-weight: 900 !important;
+  font-size: 0.82rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--text-primary) !important;
+  margin-bottom: var(--space-2) !important;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  border: var(--border-width) solid var(--text-primary) !important;
+  background-color: var(--bg-primary) !important;
+  border-radius: var(--border-radius-sm) !important;
+  font-family: var(--font-mono) !important;
+  padding: 12px var(--space-3) !important;
+  font-size: 0.95rem !important;
+  color: var(--text-primary) !important;
+  transition: border-color var(--transition-fast) var(--ease-out-expo),
+              box-shadow var(--transition-fast) var(--ease-out-expo) !important;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+  outline: none !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15) !important;
 }
 
 /* ==========================================================================
