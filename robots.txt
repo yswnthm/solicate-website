@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://solicate.in/sitemap.xml
