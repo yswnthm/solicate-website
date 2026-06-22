@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Solicate Redesign Stylesheet (v2 Refined)
+   Solicate Redesign Stylesheet (v3 Flat & Dynamic)
    Theme: Paper & Ink (Editorial, Trustworthy, Structured)
    ========================================================================== */
 
@@ -42,9 +42,37 @@ html, body {
   scroll-behavior: smooth;
 }
 
+/* Mouse Coordinates Spotlight Glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle 240px at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(249, 115, 22, 0.035) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Subtle Radial Vignette Paper Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center, 
+    transparent 20%, 
+    rgba(17, 17, 17, 0.02) 100%
+  );
+  pointer-events: none;
+  z-index: 9997;
+}
+
 /* Page-Wide Floating Editorial Frame */
 @media (min-width: 1024px) {
-  body::before {
+  html::before {
     content: '';
     position: fixed;
     inset: 16px;
@@ -110,6 +138,99 @@ a {
 
 a:hover {
   color: var(--accent);
+}
+
+/* Dynamic Highlighter Marker Styles */
+.highlight-accent {
+  background: linear-gradient(120deg, rgba(249, 115, 22, 0.14) 0%, rgba(249, 115, 22, 0.14) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.35em;
+  background-position: 0 86%;
+  padding: 0 2px;
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+/* Scroll reveals */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.85s var(--ease-out-expo),
+              transform 0.85s var(--ease-out-expo);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Technical Blueprint Labels */
+h1::before {
+  content: '// DIAGNOSTIC.ARCHIVE.01 /' / "";
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+}
+
+.diagnostic-section h3::after {
+  content: ' [diagnostics]' / "";
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+
+.diagnostic-section h3:hover::after {
+  opacity: 0.6;
+}
+
+section:has(details) h2::after {
+  content: ' [faq]' / "";
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+
+section:has(details) h2:hover::after {
+  opacity: 0.6;
+}
+
+section:has(.step-cards) h2::after {
+  content: ' [timeline]' / "";
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+
+section:has(.step-cards) h2:hover::after {
+  opacity: 0.6;
+}
+
+.proof-section h2::after {
+  content: ' [case-file]' / "";
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+
+.proof-section h2:hover::after {
+  opacity: 0.6;
 }
 
 /* Layout Utilities */
@@ -709,6 +830,10 @@ a:hover {
   background-color: rgba(249, 115, 22, 0.08) !important;
 }
 
+.compare-table td strong {
+  color: var(--accent);
+}
+
 /* ==========================================================================
    Our 5-Step System
    ========================================================================== */
@@ -899,14 +1024,10 @@ a:hover {
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
   position: relative;
-  transition: transform 0.4s var(--ease-out-expo),
-              box-shadow 0.4s var(--ease-out-expo);
-  transform-style: preserve-3d;
-  perspective: 1000px;
+  transition: box-shadow 0.4s var(--ease-out-expo);
 }
 
 .anatomy-wrapper:hover {
-  transform: translateY(-2px) rotateX(1deg) rotateY(-1deg);
   box-shadow: var(--shadow-lg);
 }
 
