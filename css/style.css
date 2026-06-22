@@ -78,6 +78,15 @@ body::after {
     pointer-events: none;
     z-index: 9999;
   }
+  
+  body {
+    padding-top: 60px;
+  }
+  
+  .site-header {
+    top: 60px;
+    border-top: var(--border-width) solid var(--text-primary);
+  }
 }
 
 /* Custom Highlight Selection */
