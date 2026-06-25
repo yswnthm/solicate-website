@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         parent.tagName === 'TEXTAREA' || 
                         parent.tagName === 'OPTION' || 
                         parent.tagName === 'LABEL' ||
-                        parent.tagName === 'A' && parent.classList.contains('site-logo') ||
+                        (typeof parent.closest === 'function' && (parent.closest('.btn') || parent.closest('button') || parent.closest('a'))) ||
                         parent.classList.contains('highlight-accent')
                     )) {
                         return NodeFilter.FILTER_REJECT;

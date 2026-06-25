@@ -184,6 +184,18 @@ a:hover {
   background-size: 100% 0.35em;
 }
 
+.theme-dark .highlight-accent {
+  color: #ffffff !important;
+  background: linear-gradient(120deg, rgba(249, 115, 22, 0.35) 0%, rgba(249, 115, 22, 0.35) 100%);
+  background-repeat: no-repeat;
+  background-size: 0% 0.35em;
+  background-position: 0 86%;
+}
+
+.theme-dark .highlight-accent.highlighted {
+  background-size: 100% 0.35em;
+}
+
 /* Scroll reveals */
 .reveal {
   opacity: 0;
@@ -935,6 +947,18 @@ a:hover {
   border-radius: var(--border-radius-md);
   position: relative;
   overflow: hidden;
+}
+
+.case-study-panel.theme-dark {
+  background-color: var(--text-primary) !important;
+}
+
+.case-study-panel.theme-dark h3 {
+  color: #ffffff !important;
+}
+
+.text-accent {
+  color: var(--accent) !important;
 }
 
 .case-study-panel::after {
