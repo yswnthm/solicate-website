@@ -221,4 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
             highlight.classList.add('highlighted');
         });
     }
+
+    // 5. Active Navigation Link Highlighting
+    const highlightActiveNavLink = () => {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
+                link.classList.add('active');
+            }
+        });
+    };
+    highlightActiveNavLink();
 });
