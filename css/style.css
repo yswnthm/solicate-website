@@ -68,23 +68,10 @@ body::after {
   z-index: 9997;
 }
 
-/* Page-Wide Floating Editorial Frame */
+/* Page-Wide Floating Editorial Frame removed */
 @media (min-width: 1024px) {
-  html::before {
-    content: '';
-    position: fixed;
-    inset: 16px;
-    border: 1px solid var(--text-primary);
-    pointer-events: none;
-    z-index: 9999;
-  }
-  
   body {
     padding-top: 0;
-  }
-  
-  .site-header {
-    top: calc(16px + var(--space-3));
   }
 }
 
@@ -620,21 +607,7 @@ a:hover {
   position: relative;
 }
 
-/* Accent lines wrapping the hero layout horizontally */
-.hero .container::before, 
-.hero .container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background-color: var(--border-color);
-  border-left: 1px dashed var(--border-color);
-  z-index: 0;
-}
-
-.hero .container::before { left: 0; }
-.hero .container::after { right: 0; }
+/* Accent lines wrapping the hero container removed */
 
 .hero .container > * {
   position: relative;
