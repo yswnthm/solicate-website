@@ -27,11 +27,11 @@ html, body {
   min-height: 100vh;
   background-color: var(--bg-primary);
   
-  /* Subtle blueprint/editorial graph paper grid */
+  /* Warm orange checkered graph/grid paper background (sitewide) */
   background-image: 
-    linear-gradient(to right, rgba(17, 17, 17, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(17, 17, 17, 0.015) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(to right, rgba(249, 115, 22, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(249, 115, 22, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
   background-attachment: fixed;
   
   color: var(--text-primary);
@@ -380,17 +380,16 @@ a:hover {
    ========================================================================== */
 .site-header {
   position: sticky;
-  top: var(--space-3);
+  top: var(--space-5);
   z-index: 1000;
-  background-color: rgba(232, 228, 220, 0.92); /* Semitransparent paper */
-  backdrop-filter: blur(12px) saturate(110%);
+  background-color: var(--paper);
   border: var(--border-width) solid var(--text-primary);
   border-radius: var(--border-radius-sm);
   box-shadow: 4px 4px 0px var(--text-primary);
-  width: 60%;
-  min-width: 860px;
-  max-width: 1000px;
-  margin: var(--space-4) auto;
+  width: 55%;
+  min-width: 780px;
+  max-width: 900px;
+  margin: var(--space-5) auto;
   padding: 0;
   overflow: hidden; /* prevents hover bleed on rounded corners */
   transition: box-shadow var(--transition-normal) var(--ease-out-expo),
@@ -415,16 +414,28 @@ a:hover {
 .site-logo {
   display: flex;
   align-items: center;
-  font-family: var(--font-sans);
-  font-weight: 900;
-  font-size: 1.45rem;
-  letter-spacing: -0.04em;
-  color: var(--text-primary);
+  justify-content: center;
   padding: 0 var(--space-5);
   border-right: var(--border-width) solid var(--text-primary);
   height: 100%;
   text-decoration: none;
   flex: 1.2 0 0;
+}
+
+.logo-img {
+  height: 24px;
+  width: 78px;
+  object-fit: contain;
+  /* Converts black SVG/PNG to #f97316 (orange) */
+  -webkit-filter: invert(53%) sepia(87%) saturate(1900%) hue-rotate(345deg) brightness(101%) contrast(100%);
+  filter: invert(53%) sepia(87%) saturate(1900%) hue-rotate(345deg) brightness(101%) contrast(100%);
+  transition: -webkit-filter var(--transition-fast) ease-in-out,
+              filter var(--transition-fast) ease-in-out;
+}
+
+.site-logo:hover .logo-img {
+  -webkit-filter: none;
+  filter: none; /* Invert back to original black on hover */
 }
 
 .nav-links {
@@ -490,11 +501,20 @@ a:hover {
   letter-spacing: 0.1em;
   flex: 1.2 0 0;
   z-index: 1;
+  background-color: var(--accent);
+  color: var(--paper) !important;
+  transition: background-color var(--transition-fast) ease-in-out,
+              color var(--transition-fast) ease-in-out;
+}
+
+#header-cta::before {
+  display: none !important;
 }
 
 #header-cta:hover {
+  background-color: var(--text-primary);
+  color: var(--paper) !important;
   transform: none;
-  border-color: var(--text-primary);
 }
 
 .site-footer {
@@ -592,13 +612,6 @@ a:hover {
   padding-top: var(--space-16) !important;
   padding-bottom: var(--space-16) !important;
   border-bottom: var(--border-width) double var(--text-primary);
-  
-  /* Orange checkered graph/grid paper background */
-  background-color: rgba(249, 115, 22, 0.03) !important;
-  background-image: 
-    linear-gradient(to right, rgba(249, 115, 22, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(249, 115, 22, 0.08) 1px, transparent 1px) !important;
-  background-size: 32px 32px !important;
 }
 
 .hero .container {

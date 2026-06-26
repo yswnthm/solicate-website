@@ -1,7 +1,7 @@
 :root {
   /* Colors - Paper & Ink Theme */
-  --paper: #e8e4dc;
-  --paper-dark: #d9d4c9;
+  --paper: #e9ddce; /* Warmer, orange-tinted paper background */
+  --paper-dark: #dbd2c4; /* Warmer, orange-tinted paper dark */
   --ink: #111111;
   --ink-mid: #444444;
   --ink-light: #888888;
