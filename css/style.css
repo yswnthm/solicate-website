@@ -462,7 +462,7 @@ a:hover {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: var(--space-8);
   align-items: start;
 }
@@ -482,6 +482,16 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+}
+
+.footer-col-title {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
 }
 
 .footer-nav a {
@@ -513,26 +523,19 @@ a:hover {
   transform-origin: left;
 }
 
-.footer-meta {
-  text-align: right;
+.footer-bottom {
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-color-dark);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.footer-meta p {
+.footer-bottom p {
   font-size: 0.85rem;
   color: var(--text-secondary);
-  margin-bottom: var(--space-2) !important;
-}
-
-.footer-legal a {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-}
-
-.footer-legal a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  margin-bottom: 0;
 }
 
 /* ==========================================================================
