@@ -279,6 +279,11 @@ a:hover {
   box-shadow: 2px 2px 0px var(--accent);
 }
 
+.btn-group {
+  display: flex;
+  gap: var(--space-4);
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
@@ -400,6 +405,18 @@ a:hover {
   .site-header {
     width: 90%;
     min-width: auto;
+  }
+
+  .site-logo {
+    padding: 0 var(--space-4);
+  }
+
+  .nav-links a {
+    padding: 0 var(--space-3);
+  }
+
+  #header-cta {
+    padding: 0 var(--space-4);
   }
 }
 
@@ -535,6 +552,15 @@ a:hover {
 
 .footer-brand .site-logo {
   display: block;
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  text-decoration: none;
+  border: none !important;
+  padding: 0 !important;
+  height: auto !important;
   margin-bottom: var(--space-3) !important;
 }
 
@@ -1278,6 +1304,17 @@ a:hover {
   gap: var(--space-6);
 }
 
+.cta-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-2);
+  line-height: 1.1;
+}
+
+#audit-cta-main {
+  font-size: 1.1rem;
+  padding: 16px 32px;
+}
+
 .audit-steps {
   display: flex;
   flex-direction: column;
@@ -1846,8 +1883,61 @@ details p {
    ========================================================================== */
 
 @media (max-width: 768px) {
+  :root {
+    --container-padding: var(--space-3); /* 16px container padding on mobile */
+  }
+
   .section {
-    padding: var(--space-12) 0;
+    padding: var(--space-6) 0 !important; /* Compact vertical spacing on mobile */
+  }
+
+  h1 {
+    font-size: 2.0rem !important;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 1.6rem !important;
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-size: 1.3rem !important;
+    line-height: 1.2;
+  }
+
+  .cta-title {
+    font-size: 1.75rem !important;
+    line-height: 1.15;
+  }
+
+  .btn {
+    padding: 12px 24px !important;
+    font-size: 11px !important;
+  }
+
+  #audit-cta-main {
+    font-size: 11px !important;
+    padding: 12px 24px !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* Stack button layouts on mobile */
+  .btn-group {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: var(--space-3) !important;
+    width: 100% !important;
+  }
+
+  .btn-group .btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    text-align: center !important;
+    box-sizing: border-box;
   }
 
   .site-header {
@@ -1855,23 +1945,39 @@ details p {
     width: calc(100% - var(--space-4));
     margin: var(--space-2) auto;
     box-shadow: 3px 3px 0px var(--text-primary);
+    min-width: auto; /* Fix mobile overflow bug */
   }
 
   .site-header .container {
     height: 54px;
     flex-direction: row !important;
     justify-content: space-between !important;
-    align-items: center;
+    align-items: stretch; /* Match desktop stretch layout */
+  }
+
+  .site-logo {
+    flex: 0 0 auto;
+    padding: 0 var(--space-3); /* Reduce padding on mobile */
+  }
+
+  .logo-img {
+    height: 20px; /* Scale down logo slightly on mobile */
+    width: 65px;
   }
 
   .nav-links {
-    flex: 2.9 0 0;
+    flex: 1 1 auto;
     gap: 0 !important;
   }
 
   .nav-links a {
+    flex: 1 1 auto; /* Allow links to size to content and shrink */
     font-size: 11px;
     padding: 0 var(--space-2);
+  }
+
+  .nav-links a:last-child {
+    border-right: none; /* Remove redundant right border on the last link on mobile */
   }
 
   #header-cta {
@@ -1935,20 +2041,5 @@ details p {
   }
   .mini-case::after {
     display: none !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 2.1rem !important;
-  }
-
-  .hero .flex.gap-4 {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero .btn {
-    width: 100%;
   }
 }
