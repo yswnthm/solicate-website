@@ -538,7 +538,7 @@ a:hover {
   padding: var(--space-12) 0 !important;
   border-top: var(--border-width) solid var(--text-primary) !important;
   background-color: var(--bg-secondary);
-  margin-top: var(--space-16) !important;
+  margin-top: var(--space-16);
   font-family: var(--font-mono);
   font-size: 14px;
 }
@@ -946,7 +946,6 @@ a:hover {
 
 .step-card:hover {
   background-color: var(--bg-secondary);
-  transform: translateX(6px);
   border-left: 4px solid var(--accent);
 }
 
@@ -1425,9 +1424,6 @@ a:hover {
 details {
   border-bottom: 1px solid var(--border-color-dark) !important;
   padding: var(--space-4) 0 !important;
-  transition: background-color var(--transition-normal) var(--ease-out-expo),
-              padding-left var(--transition-normal) var(--ease-out-expo),
-              border-left var(--transition-normal) var(--ease-out-expo);
   border-left: 0 solid var(--accent);
 }
 
@@ -1447,8 +1443,6 @@ summary {
   padding-right: var(--space-8);
   color: var(--text-primary);
   user-select: none;
-  transition: transform var(--transition-fast) var(--ease-out-expo),
-              color var(--transition-fast) var(--ease-out-expo);
 }
 
 summary::-webkit-details-marker {
@@ -1456,7 +1450,6 @@ summary::-webkit-details-marker {
 }
 
 summary:hover {
-  transform: translateX(4px);
   color: var(--accent);
 }
 
@@ -1666,7 +1659,12 @@ details p {
   border-radius: var(--border-radius-sm);
 }
 
-.article-grid,
+.article-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
 .portfolio-grid {
   display: grid;
   gap: var(--space-6);
@@ -1731,7 +1729,6 @@ details p {
 }
 
 @media (min-width: 800px) {
-  .article-grid,
   .portfolio-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
