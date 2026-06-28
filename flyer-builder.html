@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicate Flyer Builder & Exporter</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- html2canvas for client-side PNG export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --paper: #e8e4dc;
+            --paper-dark: #d9d4c9;
+            --ink: #111111;
+            --ink-mid: #444444;
+            --ink-light: #888888;
+            --accent: #f97316;
+            --workspace-bg: #1c1c1a;
+            --sidebar-bg: #292926;
+            --text-light: #e6e6e3;
+            --border-light: #3f3f3b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--workspace-bg);
+            color: var(--text-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Control Panel */
+        .sidebar {
+            width: 380px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-light);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        p.desc {
+            font-size: 0.85rem;
+            color: #a1a19a;
+            line-height: 1.4;
+        }
+
+        .control-group {
+            border-top: 1px solid var(--border-light);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #a1a19a;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border-light);
+            margin-top: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .active-tab {
+            border-color: var(--accent) !important;
+            color: var(--accent) !important;
+        }
+
+        .btn-tab-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .btn-tab {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid var(--border-light);
+            background: transparent;
+            color: #a1a19a;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Color Picker */
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        /* Canvas Workspace Area */
+        .workspace {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            padding: 3rem;
+            background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .flyer-container {
+            width: 800px;
+            min-height: 1000px;
+            background-color: var(--paper);
+            color: var(--ink);
+            padding: 80px 72px; /* Matched proposal */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 16px 40px rgba(0,0,0,0.08), 0 30px 80px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            border: 1.5px solid rgba(0,0,0,0.15); /* Matched proposal */
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            transform: scale(0.72);
+            transform-origin: center center;
+            overflow: hidden;
+        }
+        
+        /* SVG Grain Overlay */
+        .flyer-container::before {
+            content: ''; 
+            position: absolute; 
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            background-size: 200px 200px; 
+            pointer-events: none; 
+            z-index: 0; 
+            mix-blend-mode: multiply;
+        }
+        .flyer-container > * { 
+            position: relative; 
+            z-index: 1; 
+        }
+
+        /* Top Header Grid */
+        .flyer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .flyer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .flyer-logo-img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .flyer-logo-suffix {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.05em;
+            align-self: center;
+            text-transform: uppercase;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--ink);
+            background-color: rgba(17, 17, 17, 0.04);
+            padding: 6px 14px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--ink);
+            border-radius: 100px;
+            text-transform: uppercase;
+        }
+
+        .pill::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Headline Section */
+        .headline-section {
+            border-bottom: 1.5px solid var(--ink);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .flyer-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            color: var(--ink);
+        }
+
+        .flyer-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--ink-mid);
+        }
+
+        /* Content Blocks Grid */
+        .grid-block {
+            border-bottom: 1.5px solid var(--ink);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .section-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            line-height: 1.85;
+            color: var(--ink-mid);
+        }
+
+        /* Core Services list styling */
+        .services-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .service-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .service-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--paper-dark);
+            border: 1.5px solid var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .service-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-body h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.25rem;
+            color: var(--ink);
+        }
+
+        .service-body p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            line-height: 1.75;
+            color: var(--ink-mid);
+        }
+
+        /* Results list */
+        .results-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem 1rem;
+        }
+
+        .result-bullet {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-mid);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-bullet svg {
+            flex-shrink: 0;
+            width: 12px;
+            height: 12px;
+            stroke: var(--accent);
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Footer / Call To Action section */
+        .flyer-footer {
+            margin-top: auto;
+            border-top: 1.5px solid var(--ink);
+            padding-top: 1.5rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .cta-details h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            color: var(--ink);
+        }
+
+        .cta-details p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            line-height: 1.85;
+            color: var(--ink-mid);
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.4rem;
+            border-left: 1.5px solid var(--ink);
+            padding-left: 1.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: var(--ink-light);
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .contact-value {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* Contenteditable Focus Styles */
+        [contenteditable="true"] {
+            outline: none;
+            transition: background-color 0.2s;
+        }
+        
+        [contenteditable="true"]:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        [contenteditable="true"]:focus {
+            background-color: rgba(249, 115, 22, 0.08);
+            border-bottom: 1px dashed var(--accent);
+        }
+
+        /* Tip alert */
+        .tip-box {
+            background-color: #33332f;
+            border-left: 3px solid var(--accent);
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: #d1d1cc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar controls -->
+    <div class="sidebar">
+        <div class="logo">Solicate Studio</div>
+        <div>
+            <h2>Flyer Builder & Exporter</h2>
+            <p class="desc">Modify copy directly by clicking the text inside the flyer. Set your custom color palette and export a crisp PNG image.</p>
+        </div>
+
+        <div class="control-group">
+            <span class="label">Select Service Campaign</span>
+            <div class="btn-tab-group">
+                <button class="btn-tab active-tab" onclick="switchFlyer(1)" id="tab-1">01. SEO & Dev</button>
+                <button class="btn-tab" onclick="switchFlyer(2)" id="tab-2">02. Digital Growth</button>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <span class="label">Heading Variation</span>
+            <select id="headingSelector" onchange="changeHeading(this.value)" style="width: 100%; background: var(--workspace-bg); color: var(--text-light); border: 1px solid var(--border-light); padding: 0.6rem; border-radius: 4px; font-size: 0.8rem; cursor: pointer; outline: none;">
+                <!-- Dynamically populated -->
+            </select>
+        </div>
+
+        <div class="control-group">
+            <span class="label">Accent Color</span>
+            <div class="color-picker-container">
+                <input type="color" id="accentPicker" value="#f97316" oninput="updateAccentColor(this.value)">
+                <div>
+                    <span style="font-size: 0.8rem; font-weight:600;" id="accentHex">#f97316</span>
+                    <p style="font-size: 0.7rem; color: #a1a19a;">Matches buttons, lines & bullets</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="tip-box">
+                <strong>Pro-Tip:</strong> Content editing is active. Simply click any header, body text, or bullet in the flyer to write your own custom values before downloading.
+            </div>
+        </div>
+
+        <div class="control-group" style="margin-top: auto;">
+            <button class="btn" onclick="exportFlyer()">Download PNG Image</button>
+            <button class="btn btn-secondary" onclick="resetCopy()">Reset to Default Text</button>
+        </div>
+    </div>
+
+    <!-- Canvas area -->
+    <div class="workspace">
+        <div class="flyer-container" id="flyerToExport">
+            
+            <!-- Top Header -->
+            <div class="flyer-header">
+                <div class="flyer-logo-container">
+                    <img src="logo-transparent.png" alt="Solicate" class="flyer-logo-img" id="flyer-logo-img">
+                    <span class="flyer-logo-suffix" contenteditable="true" id="flyer-logo-suffix"></span>
+                </div>
+                <div class="flyer-badge pill" contenteditable="true" id="flyer-top-badge">SEO / BUILD</div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <div class="headline-section">
+                <div class="flyer-title" contenteditable="true" id="flyer-title-text">
+                    BUILD TO RANK.<br>REDESIGN TO SELL.
+                </div>
+                <div class="flyer-subtitle" contenteditable="true" id="flyer-subtitle-text">
+                    SEO-focused websites and redesigns that turn search traffic into real sales.
+                </div>
+            </div>
+
+            <!-- Objective Section -->
+            <div class="grid-block">
+                <span class="section-label" id="label-objective">[THE OBJECTIVE]</span>
+                <div class="section-text" contenteditable="true" id="objective-text">
+                    Most businesses spend money on a good-looking website and still get no inquiries. The reason is almost always the same. Google cannot read the site properly. Buyers cannot find their way to a call or a message. We fix both. We build websites designed to rank from day one, and we redesign existing websites that have stopped bringing in any meaningful business.
+                </div>
+            </div>
+
+            <!-- Services Section -->
+            <div class="grid-block">
+                <span class="section-label" id="label-services">[OUR TWO CORE SERVICES]</span>
+                <div class="services-container" id="services-list">
+                    <!-- Dynamic Core Services will render here -->
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="grid-block">
+                <span class="section-label" id="label-results">[WHAT YOU GET]</span>
+                <div class="results-list" id="results-container">
+                    <!-- Dynamic Results list will render here -->
+                </div>
+            </div>
+
+            <!-- Footer Details -->
+            <div class="flyer-footer">
+                <div class="cta-details">
+                    <h3 contenteditable="true" id="cta-headline">Request a free website & SEO audit</h3>
+                    <p contenteditable="true" id="cta-sub">We review your current site, identify the exact leaks, and give you a written plan with zero obligations.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <span>WhatsApp:</span>
+                        <span class="contact-value" contenteditable="true" id="contact-wa">+91 83673 57447</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>Website:</span>
+                        <span class="contact-value" contenteditable="true" id="contact-web">solicate.in</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>Location:</span>
+                        <span class="contact-value" contenteditable="true" id="contact-loc">Kakinada, AP</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script logic for switching & exporting -->
+    <script>
+        let currentTab = 1;
+
+        // SVG icon paths (Lucide-compatible inline SVG)
+        const icons = {
+            code:    `<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+            search:  `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+            refresh: `<svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>`,
+            mapPin:  `<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+            share2:  `<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+            tag:     `<svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,
+            video:   `<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
+            check:   `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`
+        };
+
+        const defaultContent = {
+            1: {
+                logoSuffix: "",
+                badge: "SEO / BUILD",
+                titles: [
+                    "NO SEARCH TRAFFIC?<br>WE FIX WEBSITES.",
+                    "BUILD TO RANK.<br>REDESIGN TO SELL.",
+                    "RANK ON GOOGLE.<br>CONVERT TO SALES.",
+                    "DESIGNED FOR BUYERS.<br>OPTIMIZED FOR LEADS.",
+                    "STOP TRAFFIC LEAKS.<br>START WINNING SALES."
+                ],
+                selectedTitleIndex: 0,
+                subtitle: "Search-ready websites built from scratch. Existing sites redesigned for organic leads and real sales.",
+                objectiveLabel: "[ THE OBJECTIVE ]",
+                objective: "A good-looking website means nothing if buyers cannot find it on search engines. Most companies pay for design but get zero traffic. We build search-focused websites from scratch that Google loves. And if you have a website already, we redesign it to patch traffic leaks, speed up pages, rewrite weak copy, and turn visitors into actual inquiries.",
+                servicesLabel: "[ TWO CORE SERVICES ]",
+                services: [
+                    {
+                        icon: "code",
+                        title: "NEW WEBSITE — SEO FIRST",
+                        desc: "We plan structure, keyword maps, page speed, mobile layouts, and search schemas before writing code. You get a clean, fast website that is ready to rank from day one."
+                    },
+                    {
+                        icon: "refresh",
+                        title: "REDESIGN FOR SEO & SALES",
+                        desc: "We analyze your traffic, find where visitors drop off, and fix the structure. We update old designs, optimize slow code, and rewrite copy to make buying simple."
+                    }
+                ],
+                resultsLabel: "[ WHAT YOU GET ]",
+                results: [
+                    { icon: "search", text: "Google-ready page structure" },
+                    { icon: "check",  text: "Copy written for buyer intent" },
+                    { icon: "mapPin", text: "Local SEO signals built in" },
+                    { icon: "check",  text: "WhatsApp & call CTAs optimised" },
+                    { icon: "check",  text: "High-speed mobile layout" },
+                    { icon: "check",  text: "Modern, trust-focused design" }
+                ],
+                ctaHead: "Get a free website audit",
+                ctaSub: "We review your site and send you a written plan. No cost. No obligation.",
+                wa: "+91 83673 57447",
+                web: "solicate.in",
+                loc: "Kakinada, AP"
+            },
+            2: {
+                logoSuffix: "",
+                badge: "GROWTH RETAINER",
+                titles: [
+                    "SEARCH. SOCIAL. MAPS.<br>ALL HANDLED WEEKLY.",
+                    "THE DIGITAL<br>GROWTH ENGINE.",
+                    "ONE TEAM.<br>YOUR FULL DIGITAL PRESENCE.",
+                    "STOP CHASING LEADS.<br>RUN THE ENGINE.",
+                    "OUTSOURCE THE NOISE.<br>GET THE RESULTS."
+                ],
+                selectedTitleIndex: 0,
+                subtitle: "One team. Your search, social, and analytics — handled end to end, every week.",
+                objectiveLabel: "[ THE OBJECTIVE ]",
+                objective: "Managing social media, updating maps, tracking ads, and looking at code takes too much time. When done separately, it is loud and gets zero results. We take over your complete digital footprint. One small team runs your search ranking, local maps presence, social platforms, and tracking pixels under one single plan.",
+                servicesLabel: "[ THE GROWTH PACKAGE ]",
+                services: [
+                    {
+                        icon: "share2",
+                        title: "SOCIAL MEDIA MANAGEMENT",
+                        desc: "We plan, write, design, and schedule posts for Instagram, Facebook, and YouTube weekly. We keep your brand active and talking to customers."
+                    },
+                    {
+                        icon: "mapPin",
+                        title: "GOOGLE LOCAL & SEARCH",
+                        desc: "We claim, optimize, and update your Google Business Profile and Search Console. You show up at the top when local customers search for your work."
+                    },
+                    {
+                        icon: "tag",
+                        title: "TRACKING & ANALYTICS",
+                        desc: "We install Google Tags, analytics, and pixels. We track every click on your phone number, WhatsApp button, and contact forms so you know what sells."
+                    },
+                    {
+                        icon: "video",
+                        title: "WEEKLY PRESENCE REPORTS",
+                        desc: "We send simple weekly updates on your traffic, rankings, and lead numbers. No confusing words or vanity metrics. Just clear, honest numbers."
+                    }
+                ],
+                resultsLabel: "[ WHAT IS INCLUDED ]",
+                results: [
+                    { icon: "share2", text: "Instagram & Facebook updates" },
+                    { icon: "mapPin", text: "Google Maps optimisation" },
+                    { icon: "tag",    text: "WhatsApp & call event tracking" },
+                    { icon: "video",  text: "YouTube posts & publishing" },
+                    { icon: "check",  text: "Competitor visibility tracking" },
+                    { icon: "check",  text: "Weekly plain-English reports" }
+                ],
+                ctaHead: "Start the Growth Engine",
+                ctaSub: "One retainer. Full digital presence. Setup begins in week one.",
+                wa: "+91 83673 57447",
+                web: "solicate.in",
+                loc: "Kakinada, AP"
+            }
+        };
+
+        // Initialize with Flyer 1
+        function renderFlyer(tabNum) {
+            const data = defaultContent[tabNum];
+            document.getElementById('flyer-logo-suffix').textContent = data.logoSuffix;
+            document.getElementById('flyer-top-badge').textContent = data.badge;
+            
+            // Set current title from selected index
+            document.getElementById('flyer-title-text').innerHTML = data.titles[data.selectedTitleIndex];
+            document.getElementById('flyer-subtitle-text').textContent = data.subtitle;
+            document.getElementById('label-objective').textContent = data.objectiveLabel;
+            document.getElementById('objective-text').textContent = data.objective;
+            document.getElementById('label-services').textContent = data.servicesLabel;
+            document.getElementById('label-results').textContent = data.resultsLabel;
+            
+            // Update heading selector options in sidebar
+            const headingSelector = document.getElementById('headingSelector');
+            headingSelector.innerHTML = '';
+            data.titles.forEach((title, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                // strip HTML tag for option label
+                option.textContent = title.replace(/<br>/gi, ' ');
+                if (index === data.selectedTitleIndex) {
+                    option.selected = true;
+                }
+                headingSelector.appendChild(option);
+            });
+
+            // Services
+            const servicesContainer = document.getElementById('services-list');
+            servicesContainer.innerHTML = '';
+            data.services.forEach(svc => {
+                const svcDiv = document.createElement('div');
+                svcDiv.className = 'service-item';
+                svcDiv.innerHTML = `
+                     <div class="service-icon">${icons[svc.icon] || icons.check}</div>
+                    <div class="service-body">
+                        <h4 contenteditable="true">${svc.title}</h4>
+                        <p contenteditable="true">${svc.desc}</p>
+                    </div>
+                `;
+                servicesContainer.appendChild(svcDiv);
+            });
+
+            // Results
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '';
+            data.results.forEach(res => {
+                const resSpan = document.createElement('span');
+                resSpan.className = 'result-bullet';
+                resSpan.contentEditable = "true";
+                resSpan.innerHTML = `${icons[res.icon] || icons.check} ${res.text}`;
+                resultsContainer.appendChild(resSpan);
+            });
+
+            // Footer
+            document.getElementById('cta-headline').textContent = data.ctaHead;
+            document.getElementById('cta-sub').textContent = data.ctaSub;
+            document.getElementById('contact-wa').textContent = data.wa;
+            document.getElementById('contact-web').textContent = data.web;
+            document.getElementById('contact-loc').textContent = data.loc;
+        }
+
+        function switchFlyer(tabNum) {
+            currentTab = tabNum;
+            document.getElementById('tab-1').classList.remove('active-tab');
+            document.getElementById('tab-2').classList.remove('active-tab');
+            document.getElementById(`tab-${tabNum}`).classList.add('active-tab');
+            renderFlyer(tabNum);
+        }
+
+        function changeHeading(index) {
+            const indexNum = parseInt(index);
+            defaultContent[currentTab].selectedTitleIndex = indexNum;
+            document.getElementById('flyer-title-text').innerHTML = defaultContent[currentTab].titles[indexNum];
+        }
+
+        function updateAccentColor(colorHex) {
+            document.documentElement.style.setProperty('--accent', colorHex);
+            document.getElementById('accentHex').textContent = colorHex;
+        }
+
+        function resetCopy() {
+            // Reset index back to 0 on reset
+            defaultContent[1].selectedTitleIndex = 0;
+            defaultContent[2].selectedTitleIndex = 0;
+            renderFlyer(currentTab);
+        }
+
+        function exportFlyer() {
+            const flyer = document.getElementById('flyerToExport');
+            
+            // Temporary scale reset for crisp capture
+            const originalTransform = flyer.style.transform;
+            flyer.style.transform = 'none';
+
+            html2canvas(flyer, {
+                scale: 3, // High scale for premium printing resolution
+                useCORS: true,
+                backgroundColor: null
+            }).then(canvas => {
+                flyer.style.transform = originalTransform;
+                
+                // Trigger download
+                const link = document.createElement('a');
+                const slug = currentTab === 1 ? 'solicate_seo_development_flyer' : 'solicate_digital_growth_flyer';
+                link.download = `${slug}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                console.error("Flyer capture failed: ", err);
+                alert("Could not export. Check console.");
+                flyer.style.transform = originalTransform;
+            });
+        }
+
+        // Init
+        renderFlyer(1);
+    </script>
+</body>
+</html>
