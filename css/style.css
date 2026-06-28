@@ -208,6 +208,10 @@ a:hover {
   border-bottom: var(--border-width) solid var(--text-primary);
 }
 
+main > .section:first-of-type {
+  padding-top: var(--space-2) !important;
+}
+
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
