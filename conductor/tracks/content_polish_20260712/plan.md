@@ -17,7 +17,7 @@ This plan outlines the phases, tasks, and manual verification steps required to 
 
 ---
 
-## Phase 2: Polishing Existing Pages Content
+## Phase 2: Polishing Existing Pages Content [checkpoint: 05a8c09]
 - [x] Task: Polish location pages content (injecting local case studies, FAQs, and local business JSON-LD schemas) (07d8f80)
     - [x] Update Kakinada, Rajahmundry, Visakhapatnam, Hyderabad location directories
     - [x] Embed local testimonials and city-specific client case studies
