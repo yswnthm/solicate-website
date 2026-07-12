@@ -9,6 +9,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Ensure proper representation and linking of all existing services, locations, and industry pages on main index, services, and growth hub pages.**
+- [~] **Track: Ensure proper representation and linking of all existing services, locations, and industry pages on main index, services, and growth hub pages.**
 *Link: [./tracks/navigation_links_20260712/](./tracks/navigation_links_20260712/)*
 
