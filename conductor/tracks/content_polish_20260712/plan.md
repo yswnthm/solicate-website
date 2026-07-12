@@ -4,7 +4,7 @@ This plan outlines the phases, tasks, and manual verification steps required to 
 
 ---
 
-## Phase 1: Content Audit & Strategy Mapping
+## Phase 1: Content Audit & Strategy Mapping [checkpoint: d8464f5]
 - [x] Task: Audit existing location and industry pages to list content polish requirements
     - [x] Review current copy for location pages (`/kakinada/`, `/hyderabad/`, `/bangalore/`, `/rajahmundry/`)
     - [x] Review current copy for industry hubs (`/website-for-real-estate/`, `/website-for-dental-clinics/`, `/website-for-lawyers/`)
