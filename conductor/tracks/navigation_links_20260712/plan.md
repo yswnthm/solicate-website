@@ -15,15 +15,15 @@ This plan outlines the phases, tasks, and manual verification steps required to 
 ---
 
 ## Phase 2: Services Index Page & Navigation Update
-- [ ] Task: Create the new main services index page at `/services/index.html`
-    - [ ] Create `/services/` directory and `/services/index.html` file
-    - [ ] Implement a premium responsive card grid displaying all 14 services using design tokens
-    - [ ] Write SEO-optimized meta description, page title, and structured breadcrumb schema
-- [ ] Task: Update header and footer navigation menus to link to `/services/` across all core pages
-    - [ ] Update `index.html` navigation and footer
-    - [ ] Update `work/index.html` navigation and footer
-    - [ ] Update `website-performance-questions/index.html` navigation and footer
-    - [ ] Update header/footer in the new `/services/index.html`
+- [x] Task: Create the new main services index page at `/services/index.html` (e0d8ca2)
+    - [x] Create `/services/` directory and `/services/index.html` file
+    - [x] Implement a premium responsive card grid displaying all 14 services using design tokens
+    - [x] Write SEO-optimized meta description, page title, and structured breadcrumb schema
+- [x] Task: Update header and footer navigation menus to link to `/services/` across all core pages (e0d8ca2)
+    - [x] Update `index.html` navigation and footer
+    - [x] Update `work/index.html` navigation and footer
+    - [x] Update `website-performance-questions/index.html` navigation and footer
+    - [x] Update header/footer in the new `/services/index.html`
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Services Index Page & Navigation Update' (Protocol in workflow.md)
 
 ---
