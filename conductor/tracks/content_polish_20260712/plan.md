@@ -41,9 +41,9 @@ This plan outlines the phases, tasks, and manual verification steps required to 
 - [x] Task: Implement Blog Pillar 3 (Local SEO in AP & Telangana) (79fbf0c)
     - [x] Create `/local-seo-andhra-pradesh-telangana/index.html`
     - [x] Write local citation guides, Maps setup, and city marketing strategies
-- [ ] Task: Implement Blog Pillar 4 (Why Website is Not Getting Enquiries)
-    - [ ] Create `/why-website-not-getting-enquiries/index.html`
-    - [ ] Write conversion copy, check-list lists, and call-to-action details
+- [x] Task: Implement Blog Pillar 4 (Why Website is Not Getting Enquiries) (ab8923d)
+    - [x] Create `/why-website-not-getting-enquiries/index.html`
+    - [x] Write conversion copy, check-list lists, and call-to-action details
 - [ ] Task: Implement Blog Pillar 5 (AI Website Builder vs Custom)
     - [ ] Create `/ai-website-builder-vs-custom-website/index.html`
     - [ ] Write performance comparison figures, scalability constraints, and migration paths
