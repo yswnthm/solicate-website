@@ -51,11 +51,11 @@ This plan outlines the phases, tasks, and manual verification steps required to 
 
 ---
 
-## Phase 4: Sitemaps & Final Review
-- [ ] Task: Update static XML sitemaps to include new blog posts and verify internal linking graph
-    - [ ] Add new posts to `sitemap-blog-pillars.xml`
-    - [ ] Verify that all internal links resolve correctly (no 404s)
-- [ ] Task: Run final HTML/CSS validation and accessibility checks
-    - [ ] Validate HTML markup of modified pages
-    - [ ] Test page responsiveness and mobile view optimization
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Sitemaps & Final Review' (Protocol in workflow.md)
+## Phase 4: Sitemaps & Final Review [checkpoint: 8e9112a]
+- [x] Task: Update static XML sitemaps to include new blog posts and verify internal linking graph (e010211)
+    - [x] Add new posts to `sitemap-blog-pillars.xml`
+    - [x] Verify that all internal links resolve correctly (no 404s)
+- [x] Task: Run final HTML/CSS validation and accessibility checks (8e9112a)
+    - [x] Validate HTML markup of modified pages
+    - [x] Test page responsiveness and mobile view optimization
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Sitemaps & Final Review' (Protocol in workflow.md) (8e9112a)
