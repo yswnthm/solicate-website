@@ -34,10 +34,10 @@ This plan outlines the phases, tasks, and manual verification steps required to 
     - [x] Create `/custom-website-vs-wordpress/index.html`
     - [x] Write rich, comparison-focused copywriting matching Paper & Ink theme styles
     - [x] Add internal links to pricing guides and case studies
-- [ ] Task: Implement Blog Pillar 2 (Custom Website Cost in India)
-    - [ ] Create `/website-development-cost-in-india/index.html` or refine existing pricing guide page
-    - [ ] Write transparent pricing matrix tables
-    - [ ] Integrate enquiry forms and ROI calculator link
+- [x] Task: Implement Blog Pillar 2 (Custom Website Cost in India) (07e92ce)
+    - [x] Create `/website-development-cost-in-india/index.html` or refine existing pricing guide page
+    - [x] Write transparent pricing matrix tables
+    - [x] Integrate enquiry forms and ROI calculator link
 - [ ] Task: Implement Blog Pillar 3 (Local SEO in AP & Telangana)
     - [ ] Create `/local-seo-andhra-pradesh-telangana/index.html`
     - [ ] Write local citation guides, Maps setup, and city marketing strategies
