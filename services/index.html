@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVPS9VSLYE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XVPS9VSLYE');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Design & SEO Services — Solicate</title>
+    <meta name="description" content="Explore Solicate's services: SEO-first website revamps, redesigns, local SEO, UI/UX design, performance optimization, and landing pages to rank on Google and convert traffic.">
+    <link rel="canonical" href="https://solicate.in/services/">
+    <link rel="alternate" hreflang="en-in" href="https://solicate.in/services/">
+    <link rel="alternate" hreflang="x-default" href="https://solicate.in/services/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Website Design & SEO Services — Solicate">
+    <meta property="og:description" content="Explore Solicate's range of SEO-first website revamps, redesigns, local SEO, and performance optimization services to drive Google rankings and lead generation.">
+    <meta property="og:url" content="https://solicate.in/services/">
+    <meta property="og:image" content="https://solicate.in/og-image.png">
+    <meta property="og:site_name" content="Solicate">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website Design & SEO Services — Solicate">
+    <meta name="twitter:description" content="Explore Solicate's range of SEO-first website revamps, redesigns, local SEO, and performance optimization services to drive Google rankings and lead generation.">
+    <meta name="twitter:image" content="https://solicate.in/og-image.png">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="/css/tokens.css" as="style">
+    <link rel="preload" href="/css/style.css?v=5" as="style">
+    <link rel="stylesheet" href="/css/tokens.css">
+    <link rel="stylesheet" href="/css/style.css?v=5">
+
+    <!-- Scoped Glassmorphism Grid Styles -->
+    <style>
+        .services-dark-section {
+            background-color: var(--ink);
+            color: var(--paper);
+            padding: var(--space-8) 0 var(--space-12) 0;
+            border-top: var(--border-width) solid var(--accent);
+            border-bottom: var(--border-width) solid var(--text-primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-5);
+            margin-top: var(--space-6);
+        }
+
+        @media (min-width: 640px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(219, 210, 196, 0.12);
+            border-radius: var(--border-radius-md);
+            padding: var(--space-5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform var(--transition-normal), 
+                        border-color var(--transition-normal), 
+                        box-shadow var(--transition-normal);
+            height: 100%;
+        }
+
+        .service-glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .service-glass-card h3 {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+            color: var(--paper);
+            letter-spacing: -0.01em;
+        }
+
+        .service-glass-card p {
+            font-size: 0.9rem;
+            color: rgba(219, 210, 196, 0.8);
+            line-height: 1.5;
+            margin-bottom: var(--space-4);
+            flex-grow: 1;
+        }
+
+        .service-glass-card .service-cta {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color var(--transition-fast);
+        }
+
+        .service-glass-card .service-cta span {
+            margin-left: var(--space-1);
+            transition: transform var(--transition-fast);
+        }
+
+        .service-glass-card:hover .service-cta span {
+            transform: translateX(4px);
+        }
+
+        .services-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--space-8) auto;
+        }
+
+        .services-header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-top: var(--space-3);
+            margin-bottom: var(--space-4);
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .services-header h1 {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Breadcrumb List Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://solicate.in/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Services",
+                "item": "https://solicate.in/services/"
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container flex items-center justify-between">
+            <a href="/" class="site-logo"><img src="/logo-transparent.png" alt="Solicate" class="logo-img"></a>
+            <nav class="nav-links">
+                <a href="/work/">Work</a>
+                <a href="/services/">Services</a>
+                <a href="/website-performance-questions/">Hub</a>
+            </nav>
+            <a href="/seo-revamp-audit/" class="btn" id="header-cta">Get an Audit</a>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- Services Section -->
+        <section class="services-dark-section">
+            <div class="container">
+                
+                <div class="services-header">
+                    <span class="pill" style="border-color: var(--accent); color: var(--accent);">Our Capabilities</span>
+                    <h1>SEO-First Website Services for Growing Businesses</h1>
+                    <p style="font-family: var(--font-mono); color: rgba(219, 210, 196, 0.7); font-size: 0.95rem;">
+                        We restructure your pages, local SEO signals, and client-enquiry paths before applying a premium visual layer. Browse our detailed capabilities below.
+                    </p>
+                </div>
+
+                <div class="services-grid">
+                    
+                    <!-- Card 1 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Flagship Service</span>
+                            <h3>SEO-First Website Revamp</h3>
+                            <p>Our complete structured rebuild. Ideal for businesses whose current website gets zero Google search traffic or fails to convert visitors into enquiries.</p>
+                        </div>
+                        <a href="/seo-first-website-revamp/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Core service</span>
+                            <h3>Website Redesign</h3>
+                            <p>Premium visual redesign coupled with deep page restructuring. We repair the organic engine first, then apply a modern visual design.</p>
+                        </div>
+                        <a href="/website-redesign/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Design</span>
+                            <h3>UI/UX Design</h3>
+                            <p>Conversion-led, mobile-first layouts designed specifically for wedding, visual, and service-based businesses to minimize click friction.</p>
+                        </div>
+                        <a href="/ui-ux-design/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">New Build</span>
+                            <h3>SEO-Focused Website Design</h3>
+                            <p>Starting from scratch? We design and code new static websites with clean crawl paths and search optimization built-in from day one.</p>
+                        </div>
+                        <a href="/seo-focused-websites/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Development</span>
+                            <h3>Business Website Development</h3>
+                            <p>Ultra-fast static website development tailored for security, load times under 100ms, and zero server maintenance overhead.</p>
+                        </div>
+                        <a href="/business-website-development/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Bespoke Design</span>
+                            <h3>Luxury Website Design</h3>
+                            <p>Custom-crafted, high-end portfolios and editorial websites designed to position luxury services and command premium pricing.</p>
+                        </div>
+                        <a href="/luxury-website-design/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Marketing</span>
+                            <h3>Landing Page Development</h3>
+                            <p>High-converting, single-purpose landing pages optimized for marketing campaigns, direct response ads, and client capture.</p>
+                        </div>
+                        <a href="/landing-page-development/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Optimization</span>
+                            <h3>Performance Optimization</h3>
+                            <p>Eliminate slow load times. We optimize image compression, script delivery, and layout to secure perfect Core Web Vitals.</p>
+                        </div>
+                        <a href="/performance-optimization/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">SEO Strategy</span>
+                            <h3>Technical SEO Services</h3>
+                            <p>Fix indexing blocks, clean up sitemaps, establish clean internal linking, and deploy structured schema markup for crawl efficiency.</p>
+                        </div>
+                        <a href="/technical-seo/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 10 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">SEO strategy</span>
+                            <h3>Local SEO Services</h3>
+                            <p>Rank for regional intent queries. Optimize local landing pages to capture buyers searching in specific states and cities.</p>
+                        </div>
+                        <a href="/local-seo/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 11 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Maps Rank</span>
+                            <h3>Google Business Profile</h3>
+                            <p>Optimize and structure your Google Maps listing to capture high-intent local calls, directions, and direct customer clicks.</p>
+                        </div>
+                        <a href="/google-business-profile/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 12 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Support</span>
+                            <h3>Website Maintenance</h3>
+                            <p>Ensuring your static assets remain secure, up-to-date, and completely functional with ongoing text and image revisions.</p>
+                        </div>
+                        <a href="/website-maintenance/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 13 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Local SEO</span>
+                            <h3>SEO Kakinada</h3>
+                            <p>Bespoke local SEO setups for small businesses based in Kakinada and East Godavari to dominate local searches.</p>
+                        </div>
+                        <a href="/seo-kakinada/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                    <!-- Card 14 -->
+                    <div class="service-glass-card">
+                        <div>
+                            <span class="article-meta">Audit</span>
+                            <h3>Free SEO Revamp Audit</h3>
+                            <p>Receive a custom 1-week website audit containing a written performance roadmap and an interactive strategy review call.</p>
+                        </div>
+                        <a href="/seo-revamp-audit/" class="service-cta">View Details <span>→</span></a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="section" style="padding: var(--space-8) 0; border-top: none; border-bottom: none;">
+            <div class="container" style="max-width: 800px;">
+                <h2 style="margin-bottom: var(--space-4);">Ready to build a rankable asset?</h2>
+                <p style="font-family: var(--font-mono); margin-bottom: var(--space-6);">Let's discuss how we can turn your traffic into serious enquiries. Send us a message to see if we're a good fit.</p>
+                <a href="https://wa.me/918367357447" target="_blank" rel="noopener" class="btn btn-primary">CHAT ON WHATSAPP</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" style="margin-top: 0;">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a href="/" class="site-logo" style="display: block; margin-bottom: var(--space-2);">SOLICATE.</a>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Based in Kakinada, Andhra Pradesh. Working remotely with visual businesses across Andhra Pradesh, Telangana, and India.</p>
+                </div>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Menu</p>
+                    <a href="/work/">Work</a>
+                    <a href="/services/">Services</a>
+                    <a href="/website-performance-questions/">Hub</a>
+                    <a href="/seo-revamp-audit/">Get an Audit</a>
+                </nav>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Contact</p>
+                    <a href="https://wa.me/918367357447" target="_blank" rel="noopener">WhatsApp&nbsp;↗</a>
+                    <a href="mailto:solicate.team@gmail.com">solicate.team@gmail.com&nbsp;↗</a>
+                    <a href="tel:+918367357447">+91-8367357447&nbsp;↗</a>
+                </nav>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Services</p>
+                    <a href="/seo-first-website-revamp/">SEO-First Revamp</a>
+                    <a href="/website-redesign/">Website Redesign</a>
+                    <a href="/ui-ux-design/">UI/UX Design</a>
+                    <a href="/seo-kakinada/">SEO Kakinada</a>
+                </nav>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Socials</p>
+                    <a href="https://instagram.com/solicatehq" target="_blank" rel="noopener">Instagram&nbsp;↗</a>
+                    <a href="https://twitter.com/solicatehq" target="_blank" rel="noopener">Twitter&nbsp;↗</a>
+                    <a href="https://www.linkedin.com/company/solicate/" target="_blank" rel="noopener">LinkedIn&nbsp;↗</a>
+                </nav>
+            </div>
+            <div class="footer-cities" style="padding: var(--space-4) 0; border-top: 1px solid var(--bg-secondary); margin-top: var(--space-4);">
+                <p class="footer-col-title" style="margin-bottom: var(--space-3);">Cities We Serve</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <a href="/kakinada/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Kakinada</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/rajahmundry/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Rajahmundry</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/vijayawada/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Vijayawada</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/visakhapatnam/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Visakhapatnam</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/guntur/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Guntur</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/tirupati/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Tirupati</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/nellore/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Nellore</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/kurnool/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Kurnool</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/andhra-pradesh/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Andhra Pradesh</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/hyderabad/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Hyderabad</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/warangal/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Warangal</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/nizamabad/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Nizamabad</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/khammam/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Khammam</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/karimnagar/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Karimnagar</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/telangana/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Telangana</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/chennai/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Chennai</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/bangalore/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Bangalore</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/pune/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Pune</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/coimbatore/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Coimbatore</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/madurai/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Madurai</a>
+                </div>
+            </div>
+            <div class="footer-industries" style="padding: var(--space-4) 0; border-top: 1px solid var(--bg-secondary); margin-top: var(--space-4);">
+                <p class="footer-col-title" style="margin-bottom: var(--space-3);">Industries We Serve</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <a href="/website-for-real-estate/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Real Estate</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-dental-clinics/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Dental Clinics</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-lawyers/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Lawyers</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-event-businesses/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Event Businesses</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-fitness/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Fitness</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-photographers/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Photographers</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-restaurants/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Restaurants</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-salons/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Salons</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-small-business/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Small Business</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-for-wedding-planners/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Wedding Planners</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-builders/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Builders</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-architects/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Architects</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-doctors/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Doctors</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-dentists/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Dentists</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-manufacturers/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Manufacturers</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-interior-designers/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Interior Designers</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-consultants/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Consultants</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-schools/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Schools</a>
+                    <span style="color: var(--text-muted); opacity: 0.3;">·</span>
+                    <a href="/website-design-for-educational-institutes/" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Educational Institutes</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Solicate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
