@@ -44,24 +44,27 @@
     <link rel="stylesheet" href="/css/tokens.css">
     <link rel="stylesheet" href="/css/style.css?v=5">
 
-    <!-- Scoped Glassmorphism Grid Styles -->
+    <!-- Scoped Editorial Card Grid Styles -->
     <style>
-        .services-dark-section {
-            background-color: var(--ink);
-            color: var(--paper);
+        .services-section {
             padding: var(--space-8) 0 var(--space-12) 0;
-            border-top: var(--border-width) solid var(--accent);
-            border-bottom: var(--border-width) solid var(--text-primary);
+        }
+
+        .services-container {
+            width: 100%;
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--space-5);
-            margin-top: var(--space-6);
+            gap: var(--space-6);
+            margin-top: var(--space-8);
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 768px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -73,87 +76,92 @@
             }
         }
 
-        .service-glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(219, 210, 196, 0.12);
-            border-radius: var(--border-radius-md);
-            padding: var(--space-5);
+        .service-editorial-card {
+            background-color: var(--bg-primary);
+            background-image: 
+                linear-gradient(to right, rgba(17, 17, 17, 0.01) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(17, 17, 17, 0.01) 1px, transparent 1px);
+            background-size: 16px 16px;
+            border: var(--border-width) solid var(--text-primary);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform var(--transition-normal), 
-                        border-color var(--transition-normal), 
-                        box-shadow var(--transition-normal);
+            transition: transform var(--transition-normal) var(--ease-out-expo),
+                        box-shadow var(--transition-normal) var(--ease-out-expo);
             height: 100%;
+            position: relative;
         }
 
-        .service-glass-card:hover {
-            transform: translateY(-5px);
+        .service-editorial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.12);
-            background: rgba(255, 255, 255, 0.05);
         }
 
-        .service-glass-card h3 {
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+        }
+
+        .service-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+        }
+
+        .service-number {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            font-weight: 600;
+        }
+
+        .service-editorial-card h3 {
             font-family: var(--font-sans);
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: var(--space-2);
-            color: var(--paper);
-            letter-spacing: -0.01em;
+            font-size: 1.35rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: var(--space-3);
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
         }
 
-        .service-glass-card p {
-            font-size: 0.9rem;
-            color: rgba(219, 210, 196, 0.8);
-            line-height: 1.5;
-            margin-bottom: var(--space-4);
+        .service-editorial-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-6);
             flex-grow: 1;
         }
 
-        .service-glass-card .service-cta {
+        .service-editorial-card .service-cta {
             display: inline-flex;
             align-items: center;
             color: var(--accent);
             text-decoration: none;
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color var(--transition-fast);
+            transition: gap 0.2s var(--ease-out-expo);
+            margin-top: auto;
+            gap: var(--space-1);
         }
 
-        .service-glass-card .service-cta span {
-            margin-left: var(--space-1);
+        .service-editorial-card .service-cta span {
             transition: transform var(--transition-fast);
         }
 
-        .service-glass-card:hover .service-cta span {
+        .service-editorial-card:hover .service-cta span {
             transform: translateX(4px);
-        }
-
-        .services-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto var(--space-8) auto;
-        }
-
-        .services-header h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            margin-top: var(--space-3);
-            margin-bottom: var(--space-4);
-            line-height: 1.1;
-        }
-
-        @media (min-width: 768px) {
-            .services-header h1 {
-                font-size: 3.5rem;
-            }
         }
     </style>
 
@@ -187,7 +195,7 @@
             <a href="/" class="site-logo"><img src="/logo-transparent.png" alt="Solicate" class="logo-img"></a>
             <nav class="nav-links">
                 <a href="/work/">Work</a>
-                <a href="/services/">Services</a>
+                <a href="/services/" class="active">Services</a>
                 <a href="/website-performance-questions/">Hub</a>
             </nav>
             <a href="/seo-revamp-audit/" class="btn" id="header-cta">Get an Audit</a>
@@ -197,13 +205,13 @@
     <main>
         
         <!-- Services Section -->
-        <section class="services-dark-section">
-            <div class="container">
+        <section class="services-section">
+            <div class="services-container">
                 
-                <div class="services-header">
+                <div style="max-width: 800px; margin-bottom: var(--space-8);">
                     <span class="pill" style="border-color: var(--accent); color: var(--accent);">Our Capabilities</span>
-                    <h1>SEO-First Website Services for Growing Businesses</h1>
-                    <p style="font-family: var(--font-mono); color: rgba(219, 210, 196, 0.7); font-size: 0.95rem;">
+                    <h1 style="margin-top: var(--space-4); margin-bottom: var(--space-4);">SEO-First Website Services for Growing Businesses</h1>
+                    <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7;">
                         We restructure your pages, local SEO signals, and client-enquiry paths before applying a premium visual layer. Browse our detailed capabilities below.
                     </p>
                 </div>
@@ -211,9 +219,12 @@
                 <div class="services-grid">
                     
                     <!-- Card 1 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Flagship Service</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Flagship Service</span>
+                                <span class="service-number">01</span>
+                            </div>
                             <h3>SEO-First Website Revamp</h3>
                             <p>Our complete structured rebuild. Ideal for businesses whose current website gets zero Google search traffic or fails to convert visitors into enquiries.</p>
                         </div>
@@ -221,9 +232,12 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Core service</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Core Service</span>
+                                <span class="service-number">02</span>
+                            </div>
                             <h3>Website Redesign</h3>
                             <p>Premium visual redesign coupled with deep page restructuring. We repair the organic engine first, then apply a modern visual design.</p>
                         </div>
@@ -231,9 +245,12 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Design</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Design</span>
+                                <span class="service-number">03</span>
+                            </div>
                             <h3>UI/UX Design</h3>
                             <p>Conversion-led, mobile-first layouts designed specifically for wedding, visual, and service-based businesses to minimize click friction.</p>
                         </div>
@@ -241,9 +258,12 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">New Build</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">New Build</span>
+                                <span class="service-number">04</span>
+                            </div>
                             <h3>SEO-Focused Website Design</h3>
                             <p>Starting from scratch? We design and code new static websites with clean crawl paths and search optimization built-in from day one.</p>
                         </div>
@@ -251,9 +271,12 @@
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Development</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Development</span>
+                                <span class="service-number">05</span>
+                            </div>
                             <h3>Business Website Development</h3>
                             <p>Ultra-fast static website development tailored for security, load times under 100ms, and zero server maintenance overhead.</p>
                         </div>
@@ -261,9 +284,12 @@
                     </div>
 
                     <!-- Card 6 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Bespoke Design</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Bespoke Design</span>
+                                <span class="service-number">06</span>
+                            </div>
                             <h3>Luxury Website Design</h3>
                             <p>Custom-crafted, high-end portfolios and editorial websites designed to position luxury services and command premium pricing.</p>
                         </div>
@@ -271,9 +297,12 @@
                     </div>
 
                     <!-- Card 7 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Marketing</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Marketing</span>
+                                <span class="service-number">07</span>
+                            </div>
                             <h3>Landing Page Development</h3>
                             <p>High-converting, single-purpose landing pages optimized for marketing campaigns, direct response ads, and client capture.</p>
                         </div>
@@ -281,9 +310,12 @@
                     </div>
 
                     <!-- Card 8 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Optimization</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Optimization</span>
+                                <span class="service-number">08</span>
+                            </div>
                             <h3>Performance Optimization</h3>
                             <p>Eliminate slow load times. We optimize image compression, script delivery, and layout to secure perfect Core Web Vitals.</p>
                         </div>
@@ -291,9 +323,12 @@
                     </div>
 
                     <!-- Card 9 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">SEO Strategy</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">SEO Strategy</span>
+                                <span class="service-number">09</span>
+                            </div>
                             <h3>Technical SEO Services</h3>
                             <p>Fix indexing blocks, clean up sitemaps, establish clean internal linking, and deploy structured schema markup for crawl efficiency.</p>
                         </div>
@@ -301,9 +336,12 @@
                     </div>
 
                     <!-- Card 10 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">SEO strategy</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">SEO Strategy</span>
+                                <span class="service-number">10</span>
+                            </div>
                             <h3>Local SEO Services</h3>
                             <p>Rank for regional intent queries. Optimize local landing pages to capture buyers searching in specific states and cities.</p>
                         </div>
@@ -311,9 +349,12 @@
                     </div>
 
                     <!-- Card 11 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Maps Rank</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Maps Rank</span>
+                                <span class="service-number">11</span>
+                            </div>
                             <h3>Google Business Profile</h3>
                             <p>Optimize and structure your Google Maps listing to capture high-intent local calls, directions, and direct customer clicks.</p>
                         </div>
@@ -321,9 +362,12 @@
                     </div>
 
                     <!-- Card 12 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Support</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Support</span>
+                                <span class="service-number">12</span>
+                            </div>
                             <h3>Website Maintenance</h3>
                             <p>Ensuring your static assets remain secure, up-to-date, and completely functional with ongoing text and image revisions.</p>
                         </div>
@@ -331,9 +375,12 @@
                     </div>
 
                     <!-- Card 13 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Local SEO</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Local SEO</span>
+                                <span class="service-number">13</span>
+                            </div>
                             <h3>SEO Kakinada</h3>
                             <p>Bespoke local SEO setups for small businesses based in Kakinada and East Godavari to dominate local searches.</p>
                         </div>
@@ -341,9 +388,12 @@
                     </div>
 
                     <!-- Card 14 -->
-                    <div class="service-glass-card">
+                    <div class="service-editorial-card">
                         <div>
-                            <span class="article-meta">Audit</span>
+                            <div class="card-header-flex">
+                                <span class="service-badge">Audit</span>
+                                <span class="service-number">14</span>
+                            </div>
                             <h3>Free SEO Revamp Audit</h3>
                             <p>Receive a custom 1-week website audit containing a written performance roadmap and an interactive strategy review call.</p>
                         </div>
@@ -356,7 +406,7 @@
         </section>
 
         <!-- Final CTA -->
-        <section class="section" style="padding: var(--space-8) 0; border-top: none; border-bottom: none;">
+        <section class="section" style="padding: var(--space-8) 0; border-top: var(--border-width) solid var(--text-primary); border-bottom: none;">
             <div class="container" style="max-width: 800px;">
                 <h2 style="margin-bottom: var(--space-4);">Ready to build a rankable asset?</h2>
                 <p style="font-family: var(--font-mono); margin-bottom: var(--space-6);">Let's discuss how we can turn your traffic into serious enquiries. Send us a message to see if we're a good fit.</p>
