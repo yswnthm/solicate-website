@@ -24,7 +24,7 @@ This plan outlines the phases, tasks, and manual verification steps required to 
     - [x] Update `work/index.html` navigation and footer
     - [x] Update `website-performance-questions/index.html` navigation and footer
     - [x] Update header/footer in the new `/services/index.html`
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Services Index Page & Navigation Update' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 2: Services Index Page & Navigation Update' (Protocol in workflow.md)
 
 ---
 
