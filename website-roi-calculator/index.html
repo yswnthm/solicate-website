@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVPS9VSLYE"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XVPS9VSLYE');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website ROI Calculator - Calculate Revenue Potential | Solicate</title>
+    <meta name="description" content="Use our free interactive Website ROI Calculator to see how much revenue you are losing from a low-converting website, and what an SEO revamp could add.">
+    <link rel="canonical" href="https://solicate.in/website-roi-calculator/">
+    <link rel="alternate" hreflang="en-in" href="https://solicate.in/website-roi-calculator/">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Website ROI Calculator - Calculate Revenue Potential | Solicate">
+    <meta property="og:description" content="Use our free interactive Website ROI Calculator to see how much revenue you are losing from a low-converting website.">
+    <meta property="og:url" content="https://solicate.in/website-roi-calculator/">
+    <meta property="og:image" content="https://solicate.in/og-image.png">
+    <meta property="og:site_name" content="Solicate">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website ROI Calculator - Calculate Revenue Potential | Solicate">
+    <meta name="twitter:description" content="Use our free interactive Website ROI Calculator to see how much revenue you are losing from a low-converting website.">
+    <meta name="twitter:image" content="https://solicate.in/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="/css/tokens.css" as="style">
+    <link rel="preload" href="/css/style.css?v=5" as="style">
+    <link rel="stylesheet" href="/css/tokens.css">
+    <link rel="stylesheet" href="/css/style.css?v=5">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Solicate Website ROI Calculator",
+        "operatingSystem": "Web",
+        "applicationCategory": "BusinessApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://solicate.in/"},
+            {"@type": "ListItem", "position": 2, "name": "Hub", "item": "https://solicate.in/website-performance-questions/"},
+            {"@type": "ListItem", "position": 3, "name": "Website ROI Calculator", "item": "https://solicate.in/website-roi-calculator/"}
+        ]
+    }
+    </script>
+    <style>
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+            margin-top: var(--space-6);
+        }
+        @media(min-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .calc-panel {
+            background: var(--bg-secondary);
+            padding: var(--space-5);
+            border-radius: 8px;
+        }
+        .calc-panel.results-panel {
+            background: #111;
+            color: #fff;
+        }
+        .input-group {
+            margin-bottom: var(--space-4);
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+        }
+        .results-panel .input-group label {
+            color: #ccc;
+        }
+        .input-group input[type="number"], .input-group input[type="range"] {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .input-group input[type="range"] {
+            padding: 0;
+            border: none;
+            background: transparent;
+        }
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: var(--space-4);
+            border-radius: 4px;
+            margin-bottom: var(--space-3);
+            border-left: 3px solid var(--accent);
+        }
+        .metric-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #aaa;
+            margin-bottom: var(--space-2);
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: var(--font-mono);
+            color: #fff;
+        }
+        .metric-value.highlight {
+            color: var(--accent);
+        }
+        .range-slider-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .range-value {
+            font-family: var(--font-mono);
+            font-weight: bold;
+            min-width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container flex items-center justify-between">
+            <a href="/" class="site-logo"><img src="/logo-transparent.png" alt="Solicate" class="logo-img"></a>
+            <nav class="nav-links">
+                <a href="/work/">Work</a>
+                <a href="/seo-first-website-revamp/">Services</a>
+                <a href="/website-performance-questions/">Hub</a>
+            </nav>
+            <a href="/seo-revamp-audit/" class="btn" id="header-cta">Get an Audit</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="border-bottom: none;">
+            <div class="container" style="max-width: 900px;">
+                <span class="pill">Interactive Tool</span>
+                <h1 style="margin-top: var(--space-4);">Website ROI Calculator</h1>
+                <p style="font-size: 1.25rem; color: var(--text-primary); margin-top: var(--space-4);">
+                    A website is not an expense—it is a sales asset. Use this calculator to see exactly how much revenue your current website is generating, and how much you are losing by not optimizing your conversion rate and SEO traffic.
+                </p>
+
+                <div class="calculator-grid">
+                    <!-- Inputs -->
+                    <div class="calc-panel">
+                        <h3 style="margin-bottom: var(--space-4);">Your Current Metrics</h3>
+                        
+                        <div class="input-group">
+                            <label for="traffic">Monthly Website Traffic (Visitors)</label>
+                            <input type="number" id="traffic" value="1000" min="10" step="10">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="conversion">Website Conversion Rate (%)</label>
+                            <div class="range-slider-wrap">
+                                <input type="range" id="conversion" value="1" min="0.1" max="10" step="0.1">
+                                <span class="range-value" id="conversion-val">1.0%</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">The % of visitors who become leads (submit a form, WhatsApp, or call).</p>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="closeRate">Lead-to-Customer Close Rate (%)</label>
+                            <div class="range-slider-wrap">
+                                <input type="range" id="closeRate" value="20" min="1" max="100" step="1">
+                                <span class="range-value" id="closeRate-val">20%</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">The % of website leads you actually close into paying clients.</p>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="ltv">Average Customer Value (₹)</label>
+                            <input type="number" id="ltv" value="50000" min="1000" step="1000">
+                        </div>
+                    </div>
+
+                    <!-- Outputs -->
+                    <div class="calc-panel results-panel">
+                        <h3 style="margin-bottom: var(--space-4); color: #fff;">Revenue Projection</h3>
+                        
+                        <div class="metric-card">
+                            <div class="metric-title">Current Monthly Revenue via Website</div>
+                            <div class="metric-value" id="current-rev">₹0</div>
+                            <p style="font-size: 0.8rem; color: #aaa; margin-top: 0.5rem;" id="current-leads-text">0 leads, 0 new clients per month.</p>
+                        </div>
+
+                        <div style="margin: var(--space-4) 0; border-top: 1px solid rgba(255,255,255,0.1);"></div>
+                        <h4 style="margin-bottom: var(--space-3); color: #fff; font-size: 1rem;">With a Solicate SEO Revamp:</h4>
+                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: var(--space-4);">If we optimize the site structure to double your conversion rate (better UX and trust) and increase traffic by 50% (better SEO ranking).</p>
+
+                        <div class="metric-card" style="border-color: #fff;">
+                            <div class="metric-title">Projected Monthly Revenue</div>
+                            <div class="metric-value highlight" id="projected-rev">₹0</div>
+                            <p style="font-size: 0.8rem; color: #aaa; margin-top: 0.5rem;" id="projected-leads-text">0 leads, 0 new clients per month.</p>
+                        </div>
+                        
+                        <div class="metric-card" style="background: transparent; border: none; padding: 0; margin-top: var(--space-4);">
+                            <div class="metric-title" style="color: var(--accent);">Monthly Revenue Left on the Table</div>
+                            <div class="metric-value" id="lost-rev" style="font-size: 1.5rem; color: #ff6b6b;">₹0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: var(--space-8);">What makes a website convert better?</h2>
+                <div class="two-col-problems" style="margin-top: var(--space-4);">
+                    <div>
+                        <ul class="check-list">
+                            <li><strong>Clear value proposition:</strong> Users should know what you do in 3 seconds.</li>
+                            <li><strong>Frictionless enquiry:</strong> WhatsApp buttons and forms where buyers expect them.</li>
+                            <li><strong>Deep proof:</strong> Case studies, credentials, and testimonials near the call to action.</li>
+                            <li><strong>Mobile speed:</strong> Fast loading pages that do not frustrate impatient buyers on 4G.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="callout" style="margin: 0; height: 100%;">
+                            <p style="font-size: 0.9rem; font-style: normal; margin-bottom: var(--space-3);"><strong>A bad website costs more than a good website.</strong> You only pay for a good website once, but you pay for a bad website every month through lost sales and ignored leads.</p>
+                            <a href="/seo-first-website-revamp/" style="font-weight: 700; color: var(--text-primary);">Read about our SEO Revamp approach &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--bg-secondary);">
+                    <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+                        <a href="/seo-revamp-audit/" class="btn btn-primary" id="roi-calc-audit-cta">Get a Free Website Audit</a>
+                        <a href="https://wa.me/918367357447" target="_blank" rel="noopener" class="btn" id="roi-calc-wa-cta">Chat on WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" style="margin-top: 0;">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a href="/" class="site-logo" style="display: block; margin-bottom: var(--space-2);">SOLICATE.</a>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">Based in Kakinada, Andhra Pradesh. Working with businesses across Andhra Pradesh, Telangana, and India.</p>
+                </div>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Menu</p>
+                    <a href="/work/">Work</a>
+                    <a href="/seo-first-website-revamp/">Services</a>
+                    <a href="/website-performance-questions/">Hub</a>
+                    <a href="/seo-revamp-audit/">Get an Audit</a>
+                </nav>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Contact</p>
+                    <a href="https://wa.me/918367357447" target="_blank" rel="noopener">WhatsApp &#8599;</a>
+                    <a href="mailto:solicate.team@gmail.com">solicate.team@gmail.com &#8599;</a>
+                    <a href="tel:+918367357447">+91-8367357447 &#8599;</a>
+                </nav>
+                <nav class="footer-nav">
+                    <p class="footer-col-title">Services</p>
+                    <a href="/seo-focused-websites/">SEO-Focused Websites</a>
+                    <a href="/business-website-development/">Business Websites</a>
+                    <a href="/website-redesign/">Website Redesign</a>
+                    <a href="/technical-seo/">Technical SEO</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const trafficInput = document.getElementById('traffic');
+            const conversionInput = document.getElementById('conversion');
+            const conversionVal = document.getElementById('conversion-val');
+            const closeRateInput = document.getElementById('closeRate');
+            const closeRateVal = document.getElementById('closeRate-val');
+            const ltvInput = document.getElementById('ltv');
+            
+            const currentRevEl = document.getElementById('current-rev');
+            const currentLeadsEl = document.getElementById('current-leads-text');
+            const projectedRevEl = document.getElementById('projected-rev');
+            const projectedLeadsEl = document.getElementById('projected-leads-text');
+            const lostRevEl = document.getElementById('lost-rev');
+
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount);
+            };
+
+            const calculate = () => {
+                const traffic = parseInt(trafficInput.value) || 0;
+                const conversion = parseFloat(conversionInput.value) || 0;
+                const closeRate = parseFloat(closeRateInput.value) || 0;
+                const ltv = parseInt(ltvInput.value) || 0;
+
+                // Update slider labels
+                conversionVal.textContent = conversion.toFixed(1) + '%';
+                closeRateVal.textContent = closeRate.toFixed(0) + '%';
+
+                // Current Calculations
+                const currentLeads = Math.round(traffic * (conversion / 100));
+                const currentClients = Math.round(currentLeads * (closeRate / 100));
+                const currentRev = currentClients * ltv;
+
+                // Projected Calculations (50% more traffic, 2x conversion rate)
+                const projectedTraffic = traffic * 1.5;
+                const projectedConversion = conversion * 2;
+                const projectedLeads = Math.round(projectedTraffic * (projectedConversion / 100));
+                const projectedClients = Math.round(projectedLeads * (closeRate / 100));
+                const projectedRev = projectedClients * ltv;
+
+                const lostRev = projectedRev - currentRev;
+
+                // Render
+                currentRevEl.textContent = formatCurrency(currentRev);
+                currentLeadsEl.textContent = `${currentLeads} leads, ${currentClients} new clients per month.`;
+                
+                projectedRevEl.textContent = formatCurrency(projectedRev);
+                projectedLeadsEl.textContent = `${projectedLeads} leads, ${projectedClients} new clients per month.`;
+
+                lostRevEl.textContent = formatCurrency(Math.max(0, lostRev));
+            };
+
+            trafficInput.addEventListener('input', calculate);
+            conversionInput.addEventListener('input', calculate);
+            closeRateInput.addEventListener('input', calculate);
+            ltvInput.addEventListener('input', calculate);
+
+            // Initial calculation
+            calculate();
+        });
+    </script>
+</body>
+</html>

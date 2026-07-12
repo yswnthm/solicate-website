@@ -2,15 +2,23 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://solicate.in/sitemap-core.xml</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-07-12</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://solicate.in/sitemap-services.xml</loc>
+    <lastmod>2026-07-12</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://solicate.in/sitemap-industries.xml</loc>
+    <lastmod>2026-07-12</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://solicate.in/sitemap-locations.xml</loc>
     <lastmod>2026-07-06</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://solicate.in/sitemap-blog.xml</loc>
-    <lastmod>2026-07-06</lastmod>
+    <loc>https://solicate.in/sitemap-blog-pillars.xml</loc>
+    <lastmod>2026-07-12</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://solicate.in/sitemap-work.xml</loc>
